@@ -1,9 +1,16 @@
+import 'dart:ffi';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 import 'home_screen.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -17,8 +24,8 @@ class MyApp extends StatelessWidget {
           //iconTheme: IconThemeData(color: Colors.white),
           scaffoldBackgroundColor: Colors.white,
           textTheme: Theme.of(context).textTheme.apply(
-            displayColor: Colors.black,
-          ),
+                displayColor: Colors.black,
+              ),
         ),
         home: HomeScreen());
   }

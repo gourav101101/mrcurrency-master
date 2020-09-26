@@ -9,16 +9,12 @@ class ReadingListCard extends StatelessWidget {
   final VoidCallback openContainer;
   final String image;
   final String title;
-  final Function pressDetails;
-  final String color;
 
   const ReadingListCard({
     Key key,
     this.openContainer,
     this.image,
     this.title,
-    this.pressDetails,
-    this.color,
   }) : super(key: key);
 
   @override
@@ -51,10 +47,18 @@ class ReadingListCard extends StatelessWidget {
                 ),
               ),
             ),
-            Image.asset(
-              image,
-              width: 160,
-            ),
+            Image.network(image, width: 160, loadingBuilder:
+                (BuildContext context, Widget child,
+                    ImageChunkEvent loadingProgress) {
+              if (loadingProgress == null) return child;
+              return Center(
+                  child: CircularProgressIndicator(
+                value: loadingProgress.expectedTotalBytes != null
+                    ? loadingProgress.cumulativeBytesLoaded /
+                        loadingProgress.expectedTotalBytes
+                    : null,
+              ));
+            }),
             Positioned(
               top: 105,
               bottom: 8,
